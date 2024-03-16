@@ -11,11 +11,9 @@ import tacos.entity.Ingredient;
 import tacos.entity.Taco;
 import tacos.entity.TacoOrder;
 import tacos.entity.Type;
-import tacos.repository.IngredientRepository;
+import tacos.service.IngredientService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -23,16 +21,23 @@ import java.util.stream.Collectors;
 @SessionAttributes("tacoOrder")
 @RequiredArgsConstructor
 public class DesignTacoController {
-    private final IngredientRepository ingredientRepository;
+    private final IngredientService ingredientService;
 
-    @ModelAttribute
-    public void addIngredientsToModel(Model model) {
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredientRepository.findAll().forEach(ingredient -> ingredients.add(ingredient));
+    @GetMapping
+    public String showDesignForm() {
+        return "design";
+    }
 
-        for (var type : Type.values()) {
-            model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
+    @PostMapping
+    public String processTaco(@Validated Taco taco, Errors errors,
+                              @ModelAttribute TacoOrder tacoOrder) {
+        if (errors.hasErrors()) {
+            return "design";
         }
+        tacoOrder.addTaco(taco);
+
+        log.info("Processing {}", taco);
+        return "redirect:/orders/current";
     }
 
     @ModelAttribute(name = "tacoOrder")
@@ -45,29 +50,12 @@ public class DesignTacoController {
         return new Taco();
     }
 
-    @GetMapping
-    public String showDesignForm() {
-        return "design";
-    }
+    @ModelAttribute
+    public void addIngredientsToModel(Model model) {
+        List<Ingredient> ingredients = ingredientService.findAll();
 
-    @PostMapping
-    public String processTaco(
-            @Validated Taco taco, Errors errors,
-            @ModelAttribute TacoOrder tacoOrder) {
-
-        if (errors.hasErrors()) {
-            return "design";
+        for (var type : Type.values()) {
+            model.addAttribute(type.toString().toLowerCase(), ingredientService.filterByType(ingredients, type));
         }
-
-        tacoOrder.addTaco(taco);
-
-        return "redirect:/orders/current";
-    }
-
-    private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
-        return ingredients
-                .stream()
-                .filter(ingredient -> ingredient.getType().equals(type))
-                .collect(Collectors.toList());
     }
 }

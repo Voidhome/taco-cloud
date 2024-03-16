@@ -48,6 +48,9 @@ public class TacoOrder implements BaseEntity<Long> {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Taco> tacos = new ArrayList<>();
 
+    @ManyToOne
+    private User user;
+
     private LocalDateTime placedAt = LocalDateTime.now();
 
     public void addTaco(Taco taco) {
