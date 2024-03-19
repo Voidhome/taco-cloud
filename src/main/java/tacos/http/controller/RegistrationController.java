@@ -1,4 +1,4 @@
-package tacos.controller;
+package tacos.http.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class RegistrationController {
 
     @PostMapping
     public String processRegistration(UserDto userDto){
-        userService.registerNewUser(userDto);
+        userService.create(userDto);
         return "redirect:/login";
     }
 }

@@ -24,6 +24,7 @@ repositories {
 
 ext {
     junitVersion = '5.9.2'
+    mapstructVersion = '1.5.5.Final'
 }
 
 dependencies {
@@ -33,6 +34,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+
+
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
     implementation 'org.postgresql:postgresql'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

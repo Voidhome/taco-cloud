@@ -1,4 +1,4 @@
-package tacos.controller;
+package tacos.http.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +21,7 @@ import java.util.List;
 @SessionAttributes("tacoOrder")
 @RequiredArgsConstructor
 public class DesignTacoController {
+
     private final IngredientService ingredientService;
 
     @GetMapping

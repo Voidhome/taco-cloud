@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Entity(name = "users")
 @Data
+@Entity(name = "users")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
@@ -23,21 +23,21 @@ public class User implements UserDetails, BaseEntity<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private final String username;
+    private String username;
 
-    private final String password;
+    private String password;
 
-    private final String fullname;
+    private String fullname;
 
-    private final String street;
+    private String street;
 
-    private final String city;
+    private String city;
 
-    private final String state;
+    private String state;
 
-    private final String zip;
+    private String zip;
 
-    private final String phoneNumber;
+    private String phoneNumber;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

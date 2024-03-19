@@ -1,16 +1,13 @@
 package tacos.dto;
 
-import lombok.Value;
+public record UserDto(
 
-@Value
-public class UserDto {
-
-      String username;
-      String password;
-      String fullname;
-      String street;
-      String city;
-      String state;
-      String zip;
-      String phone;
+        String username,
+        String password,
+        String fullname,
+        String street,
+        String city,
+        String state,
+        String zip,
+        String phoneNumber) {
 }

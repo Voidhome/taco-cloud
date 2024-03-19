@@ -4,6 +4,7 @@ spring:
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+
   jpa:
     properties:
       hibernate:
@@ -12,4 +13,11 @@ spring:
         hbm2ddl.auto: create
     open-in-view: false
 
+logging:
+  level:
+    root: info
+    org.springframework.security: debug
 
+taco:
+  orders:
+    pageSize: 10

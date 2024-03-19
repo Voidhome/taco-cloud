@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class IngredientService {
 
     private final IngredientRepository ingredientRepository;

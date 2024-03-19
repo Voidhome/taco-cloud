@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.time.LocalDateTime;
@@ -14,6 +17,9 @@ import java.util.List;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TacoOrder implements BaseEntity<Long> {
 
     @Id
@@ -51,10 +57,14 @@ public class TacoOrder implements BaseEntity<Long> {
     @ManyToOne
     private User user;
 
-    private LocalDateTime placedAt = LocalDateTime.now();
+    private LocalDateTime placedAt;
 
     public void addTaco(Taco taco) {
         this.tacos.add(taco);
     }
 
+    @PrePersist
+    public void setPlacedAt(){
+        this.placedAt = LocalDateTime.now();
+    }
 }

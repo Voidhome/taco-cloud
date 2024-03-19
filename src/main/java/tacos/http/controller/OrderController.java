@@ -1,4 +1,4 @@
-package tacos.controller;
+package tacos.http.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,9 @@ import tacos.service.OrderService;
 @SessionAttributes("tacoOrder")
 @RequiredArgsConstructor
 public class OrderController {
+
     private final OrderService orderService;
+
     @GetMapping("/current")
     public String orderForm(@ModelAttribute TacoOrder order,
                             @AuthenticationPrincipal User user) {
@@ -33,9 +35,7 @@ public class OrderController {
         if (errors.hasErrors()) {
             return "orderForm";
         }
-
-        order.setUser(user);
-        orderService.save(order);
+        var tacoOrder = orderService.create(order, user);
         sessionStatus.setComplete();
 
         return "redirect:/";
