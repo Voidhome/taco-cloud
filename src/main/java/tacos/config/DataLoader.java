@@ -42,22 +42,22 @@ public class DataLoader {
             ingredientRepository.save(salsa);
             ingredientRepository.save(sourCream);
 
-            userService.create(new UserDto(
+            userService.createUser(new UserDto(
                     "user", "user", "Test User", "Test street",
                     "Test city", "Test state", "Test zip", "Test phone"
             ));
 
-            tacoService.create(Taco.builder()
+            tacoService.createTaco(Taco.builder()
                     .name("Carnivore")
                     .ingredients(Arrays.asList(flourTortilla, groundBeef, carnitas, sourCream, salsa, cheddar))
                     .build());
 
-            tacoService.create(Taco.builder()
+            tacoService.createTaco(Taco.builder()
                     .name("Bovine Bounty")
                     .ingredients(Arrays.asList(cornTortilla, groundBeef, cheddar, monterreyJack, sourCream))
                     .build());
 
-            tacoService.create(Taco.builder()
+            tacoService.createTaco(Taco.builder()
                     .name("Veg-Out")
                     .ingredients(Arrays.asList(flourTortilla, cornTortilla, dicedTomatoes, lettuce, salsa))
                     .build());
