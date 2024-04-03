@@ -1,3 +1,7 @@
+body {
+    font-family: arial;
+}
+
 div.ingredient-group:nth-child(odd) {
     float: left;
     padding-right: 20px;

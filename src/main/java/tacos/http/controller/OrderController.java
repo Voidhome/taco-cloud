@@ -35,7 +35,7 @@ public class OrderController {
         if (errors.hasErrors()) {
             return "orderForm";
         }
-        var tacoOrder = orderService.create(order, user);
+        var tacoOrder = orderService.createOrder(order, user);
         sessionStatus.setComplete();
 
         return "redirect:/";

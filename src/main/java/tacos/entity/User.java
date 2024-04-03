@@ -24,19 +24,12 @@ public class User implements UserDetails, BaseEntity<Long> {
     private Long id;
 
     private String username;
-
     private String password;
-
     private String fullname;
-
     private String street;
-
     private String city;
-
     private String state;
-
     private String zip;
-
     private String phoneNumber;
 
     @Override

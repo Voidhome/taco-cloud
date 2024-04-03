@@ -22,7 +22,7 @@ public class RegistrationController {
 
     @PostMapping
     public String processRegistration(UserDto userDto){
-        userService.create(userDto);
+        userService.createUser(userDto);
         return "redirect:/login";
     }
 }

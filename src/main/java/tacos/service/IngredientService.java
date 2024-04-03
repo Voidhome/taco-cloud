@@ -1,30 +1,23 @@
 package tacos.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import tacos.entity.Ingredient;
 import tacos.entity.Type;
-import tacos.repository.IngredientRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
-@Service
-@RequiredArgsConstructor
-@Transactional(readOnly = true)
-public class IngredientService {
 
-    private final IngredientRepository ingredientRepository;
+public interface IngredientService {
 
-    public List<Ingredient> findAll(){
-        return ingredientRepository.findAll();
-    }
+    List<Ingredient> findAllIngredients();
 
-    public Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
-        return ingredients
-                .stream()
-                .filter(ingredient -> ingredient.getType().equals(type))
-                .collect(Collectors.toList());
-    }
+    Optional<Ingredient> findIngredientById(String ingredientId);
+
+    Ingredient createIngredient(Ingredient ingredient);
+
+    void updateIngredient(String ingredientId, Ingredient ingredient);
+
+    void deleteIngredient(String ingredientId);
+
+    Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type);
 }

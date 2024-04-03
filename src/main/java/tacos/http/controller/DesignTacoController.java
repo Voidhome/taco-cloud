@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tacos.entity.Ingredient;
@@ -30,9 +30,9 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processTaco(@Validated Taco taco, Errors errors,
+    public String processTaco(@Validated Taco taco, BindingResult bindingResult,
                               @ModelAttribute TacoOrder tacoOrder) {
-        if (errors.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "design";
         }
         tacoOrder.addTaco(taco);
@@ -53,7 +53,7 @@ public class DesignTacoController {
 
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
-        List<Ingredient> ingredients = ingredientService.findAll();
+        List<Ingredient> ingredients = ingredientService.findAllIngredients();
 
         for (var type : Type.values()) {
             model.addAttribute(type.toString().toLowerCase(), ingredientService.filterByType(ingredients, type));

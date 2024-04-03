@@ -13,11 +13,11 @@ spring:
         hbm2ddl.auto: create
     open-in-view: false
 
+  data:
+    rest:
+      base-path: /data-api
+
 logging:
   level:
     root: info
     org.springframework.security: debug
-
-taco:
-  orders:
-    pageSize: 10
